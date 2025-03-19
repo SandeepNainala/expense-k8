@@ -120,6 +120,17 @@ spec:
       containers:
       - name: frontend
         image: sandeepnainala9/frontend:v1.0
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          readOnly: true
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: frontend
+          items:
+            - key: nginx.conf
+              path: nginx.conf
 ---
 apiVersion: v1
 kind: Service
